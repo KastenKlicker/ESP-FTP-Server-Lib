@@ -1,6 +1,8 @@
 #ifndef FTP_COMMAND_H_
 #define FTP_COMMAND_H_
 
+#define MAX_LATENCY 500
+
 #include <Arduino.h>
 #include <WiFiClient.h>
 #include <vector>
@@ -66,8 +68,21 @@ public:
   }
 
   int data_read(uint8_t *c, size_t l) {
-    if ((_DataConnection != 0) && (_DataConnection->available() > 0)) {
-      return _DataConnection->readBytes(c, l);
+    if (_DataConnection != 0) {
+      if (_DataConnection->available() > 0){
+        return _DataConnection->readBytes(c, l);
+  
+      }else{
+  
+        uint16_t DataLatency=0;
+        while(!(_DataConnection->available() > 0)){
+          vTaskDelay(1);
+          if(DataLatency++ > MAX_LATENCY){
+            return 0;
+          }
+        }
+        return _DataConnection->readBytes(c, l);
+      }
     }
     return 0;
   }
