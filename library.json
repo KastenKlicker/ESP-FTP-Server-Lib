@@ -1,5 +1,5 @@
 {
-  "name": "ESP-FTP-Server-Lib",
+  "name": "ESP-FTP-Server",
   "version": "0.14.2",
   "description": "Run a simple FTP server on your ESP8266 or ESP32. You can mount multiple filesystems like SD-Card, MMC-Card or SPIFFS at the same time.",
   "keywords": "ftp, wifi, communication, usb",
@@ -13,7 +13,7 @@
     {
       "name": "KastenKlicker",
       "email": "dev@kastenklicker.de",
-      "url": "kastenklicker.de",
+      "url": "https://kastenklicker.de",
       "maintainer": true
     },
     {
